@@ -3,3 +3,12 @@
 PinOut
 
 ![alt tag](http://www.pighixxx.com/test/wp-content/uploads/2016/11/lopy_v01_3_pinout_rc.png)
+
+
+# Reference
+
+- Getting started with LoPy
+
+[Using TTN](https://github.com/ttn-liv/devices/wiki/Getting-started-with-the-PyCom-LoPy)
+
+[Docs Pycom](https://docs.pycom.io/)
