@@ -8,39 +8,40 @@
 // ---------------------
 
 // ATMEGA 328P
-const int csPin = 7;          // LoRa radio chip select
+/*
+const int csPin = 7;          // LoRa radio chip select 
 const int resetPin = 6;       // LoRa radio reset
 const int irqPin = 2;         // change for your board; must be a hardware interrupt pin*/
 
 // ATMEGA 32U4 - ADAFRUIT FEATHER BOARD
-//const int csPin = 8;          // LoRa radio chip select
-//const int resetPin = 4;       // LoRa radio reset
-//const int irqPin = 7;         // change for your board; must be a hardware interrupt pin
+const int csPin = 8;          // LoRa radio chip select
+const int resetPin = 4;       // LoRa radio reset
+const int irqPin = 7;         // change for your board; must be a hardware interrupt pin
 
 // VARIABLES
 String outgoing;              // outgoing message
 byte msgCount = 0;            // count of outgoing messages
-byte localAddress = 0xA1;     // address of this device
-byte destination = 0x11;      // destination to send to
+byte localAddress = 0xB1;     // address of this device
+byte destination = 0xFF;      // destination to send to
 long lastSendTime = 0;        // last send time
 
 
 void setup()
 {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   //Timer1.initialize(500000);          // Manda mensagem a cada 05 segundos
   //Timer1.pwm(9, 512);               // setup pwm on pin 9, 50% duty cycle
   //Timer1.attachInterrupt(callback);   // attaches callback() as a timer overflow interrupt
   pinMode(13,OUTPUT);
   
-  Serial.println("LoRa Duplex Endpoint");
+  //Serial.println("LoRa Duplex Endpoint");
   LoRa.setPins(csPin, resetPin, irqPin);// set CS, reset, IRQ pin
   if (!LoRa.begin(915E6)) 
   {             // initialize ratio at 915 MHz
-    Serial.println("LoRa init failed. Check your connections.");
+    //Serial.println("LoRa init failed. Check your connections.");
     while (true);                       // if failed, do nothing
   }
-  Serial.println("LoRa init succeeded.");
+  //Serial.println("LoRa init succeeded.");
   pinMode(8, OUTPUT);
 }
 
@@ -57,14 +58,23 @@ void callback()
  
 void loop()
 {
+   LoRa.sleep();
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
+   callback(); 
    //onReceive(LoRa.parsePacket());
    //LowPower.idle(SLEEP_8S, ADC_OFF, TIMER2_OFF, TIMER1_OFF, TIMER0_OFF, SPI_OFF, USART0_OFF, TWI_OFF);
 } 
 
 // ---------------------Message format ---------------------- //
-// |
+// |                                                          //
 // | destADDRESS - localADDRESS - msgID - #payload - "MSG"    //
-// |
+// |                                                          //
 // ---------------------------------------------------------- //
 
 void sendMessage(uint8_t* outgoing) 
@@ -103,7 +113,7 @@ void onReceive(int packetSize)
 
   if (incomingLength != incoming.length())
   {   // check length for error
-    Serial.println("error: message length does not match length");
+    //Serial.println("error: message length does not match length");
     return;                             // skip rest of function
   }
 
@@ -113,6 +123,7 @@ void onReceive(int packetSize)
     return;                             // skip rest of function
   }
   // if message is for this device, or broadcast, print details:
+  /*
   Serial.println("Received from: 0x" + String(sender, HEX));
   Serial.println("Sent to: 0x" + String(recipient, HEX));
   Serial.println("Message ID: " + String(incomingMsgId));
@@ -121,4 +132,5 @@ void onReceive(int packetSize)
   Serial.println("RSSI: " + String(LoRa.packetRssi()));
   Serial.println("Snr: " + String(LoRa.packetSnr()));
   Serial.println();
+  */
 }
