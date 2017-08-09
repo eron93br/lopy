@@ -17,3 +17,17 @@ PinOut
 [Using TTN](https://github.com/ttn-liv/devices/wiki/Getting-started-with-the-PyCom-LoPy)
 
 [Docs Pycom](https://docs.pycom.io/)
+
+# Gateway tutorial...
+
+Seguem os links
+
+tutorial
+
+https://seasluglabs.io/blogs/guides/the-things-network-us-setup-with-lopy-as-a-nano-gateway-and-lopy-node
+
+https://www.youtube.com/watch?v=jL7hSx9qNjc&t=892s
+
+codigo github
+
+https://github.com/pycom/pycom-libraries/tree/master/examples/lorawan-nano-gateway
