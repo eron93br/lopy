@@ -1,19 +1,12 @@
-/*
-  LoRa Duplex communication
-
-  Sends a message every half second, and polls continually
-  for new incoming messages. Implements a one-byte addressing scheme,
-  with 0xFF as the broadcast address.
-
-  Uses readString() from Stream class to read payload. The Stream class'
-  timeout may affect other functuons, like the radio's callback. For an
-
-  created 28 April 2017
-  by Tom Igoe
-*/
-
 #include <SPI.h>              // include libraries
 #include <LoRa.h>
+
+// Parametros da comunicacao que podem ser alterados! 
+#define POWER 23
+#define spreadingFactor 7
+#define signalBandwidth 125E3
+#define codingRateDenominator 5
+#define preambleLength 8
 
 // ----------- ATMEGA 328P PINOUTS ----------------------- //
 /*const int csPin = 7;        // LoRa radio chip select
