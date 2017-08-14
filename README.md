@@ -18,6 +18,13 @@ PinOut
 
 [Docs Pycom](https://docs.pycom.io/)
 
+
+# SemTech REFERENCE
+
+[SX1276 Development Guide](http://www.semtech.com/images/datasheet/SX1276DevKit_Userguide_STD.pdf)
+
+[Recommended SX1276 Settings for EU868 LoRaWAN Network Operation](http://www.semtech.com/images/datasheet/an1200.24.pdf)
+
 # Gateway tutorial...
 
 Seguem os links
