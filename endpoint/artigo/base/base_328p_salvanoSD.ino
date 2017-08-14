@@ -16,7 +16,7 @@ const int irqPin = 2;         // change for your board; must be a hardware inter
 // VARIABLES
 String outgoing;              // outgoing message
 byte msgCount = 0;            // count of outgoing messages
-byte localAddress = 0x55;     // address of this device
+byte localAddress = 0x10;     // address of this device
 byte destination = 0xFF;      // destination to send to, 0xFF is a broadcast!!!!
 long lastSendTime = 0;        // last send time
 
@@ -50,6 +50,7 @@ void setup()
 }
 
 bool flag = false;
+unsigned long t1, t2; 
 
 // Função interrupcao para mandar informacoes via LoRa
 void callback()
@@ -60,7 +61,7 @@ void callback()
 }
  
 void loop()
-{
+{ 
    onReceive(LoRa.parsePacket());
 } 
 
@@ -84,6 +85,7 @@ void sendMessage(uint8_t* outgoing)
 
 void onReceive(int packetSize) 
 {
+
   if (packetSize == 0)
   { 
     digitalWrite(13, LOW);
@@ -102,6 +104,7 @@ void onReceive(int packetSize)
   {
     incoming += (char)LoRa.read();
     digitalWrite(8, HIGH);
+    t1 = millis();
   }
 
   if (incomingLength != incoming.length())
@@ -127,6 +130,9 @@ void onReceive(int packetSize)
         myFile.print("Message ID: " + String(incomingMsgId)); 
         myFile.print(" | ");
         myFile.print("RSSI: " + String(LoRa.packetRssi()));
+        myFile.print(" | ");
+        myFile.print("Latency: " + String(abs(t1-t2)));
+        Serial.println("Latency: " + String(abs(t1-t2)));
         // close the file:
         myFile.println(" ");
         myFile.close();          
@@ -146,4 +152,5 @@ void onReceive(int packetSize)
   Serial.println("Snr: " + String(LoRa.packetSnr()));
   Serial.println();
   */
+  t2 = millis(); 
 }
