@@ -47,6 +47,10 @@ void setup()
   pinMode(8, OUTPUT);
   
   delay(5000); 
+  myFile = SD.open("test.txt", FILE_WRITE);
+  myFile.println("Nova medição...");
+  myFile.println(" ");
+  myFile.close();   
 }
 
 bool flag = false;
