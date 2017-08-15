@@ -18,7 +18,6 @@ byte destination = 0xFF;      // destination to send to
 void setup() 
 {
   Serial.begin(9600);                   // initialize serial
-  
   //while (!Serial);
   Timer1.initialize(100000);         // initialize timer1, and set a 1/2 second period
   Timer1.attachInterrupt(callback);  // attaches callback() as a timer overflow interrupt
@@ -39,7 +38,7 @@ void setup()
 
 void callback()
 {
-   String message = "HeLoRa World!";   
+   String message = "LO";   
    sendMessage(message);
 }
 
